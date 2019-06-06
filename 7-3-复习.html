@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+  <script src="./Vue.js"></script>
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    1.输入框控制div宽度  <br>
+    <input type="text" v-model='xx'>{{xx}}  <br>
+    <div :style='divstyle'>父div</div>
+    <button @keyup.space='xx+=4'>按空格键</button>
+    {{divstyle}}    <br>
+    2.输入框控制组件div宽度   <br>
+    <input type="text" v-model='com'>{{com}}  <br>
+    <childcom1 v-bind:childwidth='com'></childcom1>
+
+  </div>
+
+   
+    
+</body>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      xx: 340,
+      com:400,
+     
+    },
+    methods: {
+
+    },
+    computed: {
+      divstyle:function(){
+        return {
+          width:this.xx+'px',
+          border:'1px solid black',
+          background:'pink',
+        }
+      }
+    },
+    components: {
+      
+      'childcom1':{
+        template:"<div v-bind:style='childdivstyle'>这是子组件div ----- 当前div宽度为:{{childwidth}}px</div>",
+        props:['childwidth'],
+        methods:{},
+        computed:{
+          childdivstyle:function(){
+            return {
+              border:"1px solid red",
+              width:this.childwidth+'px',
+              background:'greenyellow',
+            }
+          },
+
+        },
+      }
+    },
+  });
+</script>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+    .transRed{
+      background: red;
+    }
+    .transGreen{
+      background: green;
+    }
+  </style>
+</head>
+
+<body>
+    <div id="app">
+      <!--  实时显示当前时间 -->
+      {{xx}} <br>
+      {{xx | formatDate('a')}}<br>
+
+      <!-- v-text -->
+      {{apple}}  ++++  <span v-text='apple'></span><br>
+      
+      <!-- v-html -->
+      {{banana}} <br>
+      <span v-text="banana"></span><br>
+     
+      <span v-html='banana'></span>
+
+      <!-- v-bind -->
+      <div class={{className}}>背景变红色</div>
+      <div v-bind:class='className'>v-bind  div背景变红色</div>
+
+      <!-- v-on -->
+      <button v-on:dblclick="addone">{{num}}---双击加一</button>
+      <button @click="addone">{{num}}---单击加一</button>
+    </div>
+</body>
+<script>
+  var plusDate=function(value){
+    return value<10?'0'+value:value
+  }
+  new Vue({
+    
+    el: "#app",
+    data: {
+      xx:new Date(),
+      apple:"苹果",
+      banana:"<span style='color:yellowgreen;'>香蕉</span>",
+      className:'transRed',
+      num:0
+    },
+    methods: {
+      addone:function(){
+        this.num++
+        this.className='transGreen'
+      }
+    },
+    computed: {
+
+    },
+    mounted(){
+
+      console.log(this.$data,1111)
+      var _this=this
+      this.timer=setInterval(function(){
+        // console.log(_this)
+        _this.xx=new Date()
+      },1000)
+      console.log(this.$data,2222)
+    },
+    beforeDestroy(){
+      this.timer&&clearInterval(this.timer)
+    },
+    filters:{
+      formatDate:function(m,n){
+        var fDate=new Date(m)
+        var year=fDate.getFullYear(m)
+        var month=plusDate(fDate.getMonth(m)+1)
+        var day=plusDate(fDate.getDate(m))
+        var hour=plusDate(fDate.getHours(m))
+        var min=plusDate(fDate.getMinutes(m))
+        var sec=plusDate(fDate.getSeconds(m))
+        return `现在时间是:${year}-${month}-${day}         ${hour}:${min}:${sec}`+  n
+      }
+    }
+  });
+</script>
+
+</html>

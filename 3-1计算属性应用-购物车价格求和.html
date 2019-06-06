@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    购物车中商品总计:{{addPrice}}
+
+
+
+  </div>
+
+
+
+</body>
+<script>
+  var app2=new Vue({
+    el:'#app2',
+    data:{
+      msg:'这是app2的msg 看能否被加到app1中的计算属性得到'
+    }
+  })
+var app1 = new Vue({
+    el: "#app",
+    data: {
+      
+      cart1: [
+        {name:'apple',price:2.5,number:3.6},
+        {name:'banana',price:4.5,number:8.5}
+      ],
+      cart2:[
+        {name:'phone',price:3999,number:2},
+        {name:'computer',price:5999,number:1}
+      ]
+
+    },
+    methods: {},
+    computed:{ 
+      addPrice:function(){
+        var price=0
+        for (let i=0; i<this.cart1.length; i++){
+          price+=this.cart1[i].price*this.cart1[i].number
+        }
+        for (let i=0;i<this.cart2.length;i++){
+          price+=this.cart2[i].price*this.cart2[i].number 
+        } 
+        return price +'-------'+ app2.msg
+      }
+    }
+  });
+</script>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <my-acomponent></my-acomponent>
+    <my-bcomponent></my-bcomponent>
+
+
+  </div>
+
+
+
+</body>
+<script>
+  Vue.component('my-acomponent', {
+    template: '<div><button @click="handle">点击我向B组件传递数据</button> <div>',
+    data: function () {
+      return {
+        aaa: '我是来自A组件的内容'
+      }
+    },
+    methods: {
+      handle: function () {
+        this.$root.bus.$emit('lala', this.aaa);
+      }
+    }
+  })
+  Vue.component('my-bcomponent', {
+    template: '<div></div>',
+    created: function () {
+      //B组件在实例创建的时候就监听事件---lala事件
+      this.$root.bus.$on('lala', function (value) {
+        alert(value)
+      });
+    }
+  })
+
+
+
+  Vue.component('child-component', {
+    template: '<button @click="setFatherData">通过点击我修改父亲的数据 </button>',
+    methods: {
+      setFatherData: function () {
+        this.$parent.msg = '数据已经修改了'
+      }
+    }
+  })
+
+
+
+
+  var app = new Vue({
+    el: "#app",
+    data: {
+      xx: "hello world",
+      bus:new Vue(),
+    },
+    methods: {},
+    computed: {},
+    components: {
+
+    },
+  });
+
+
+
+
+
+</script>
+
+</html>

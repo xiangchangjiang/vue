@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+    <div id="app"> 
+      使用计算属性:{{fullName}}  <br><br>
+      使用watch监听器:   <br>  
+      输入firstName:<input v-model='firstName'  >  <br>
+      输入lastName:<input v-model='lastName'  >   <br>
+      {{fullName}}
+      
+
+    </div>
+
+      
+    
+</body>
+<script>
+
+  var app=new Vue({
+    el: "#app",
+    data: {
+      firstName:"zhang",
+      lastName:"sanfeng"
+    },
+    methods: {},
+    computed: {
+      fullName:{
+     
+        set:function(inputName){
+          // 约定姓名之间以逗号分隔
+          
+          var arr=inputName.split(',')
+          this.firstName=arr[0]
+          this.lastName=arr[1]
+        },
+        get:function(){
+          // console.log(1)
+          return this.firstName+' '+this.lastName
+        }
+      }
+    },
+    watch:{
+      
+      firstName:function(){
+        return this.firstName+' '+this.lastName
+      },
+      lastName:function(){
+        return this.firstName+' '+this.lastName
+      }
+    }
+  });
+
+app.fullName='guan,yu'
+</script>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>计算属性</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app"> 
+    {{xx}} <br>
+    {{xx.split(',').reverse().join(',')}} <br>
+    <!-- 逻辑过长就会变得比较臃肿,难以维护,所以遇到复杂的逻辑时,应该使用计算属性 -->
+    下面是通过计算属性得到的 <br>
+    {{reverseStr}}  <br>
+    <!-- <button @click='reverseStr'>点击翻转</button><hr> -->
+    <hr><br>
+    计算属性
+    {{getTime}}
+    <br>
+    方法
+    {{thisTime()}}
+
+
+
+
+
+  </div>
+  
+</body>
+<script>
+var app = new Vue({
+    el: "#app",
+    data: {
+      xx: "123,456,789",
+      msg:'hello world'
+
+    },
+   
+    methods: {
+      thisTime:function(){
+        return Date.now()
+      }
+    
+    },
+    computed: {
+      // 计算属性
+      reverseStr: function () {
+
+        this.xx=this.xx.split(',').reverse().join(',')
+        return this.xx
+      },
+      getTime:function(){
+        return Date.now()
+      }
+    }
+  });
+</script>
+
+</html>

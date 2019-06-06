@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>点击各自button,数字分别相加</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+    <div id="app">
+      {{xx}}   <br> 
+      解决点击一个button 另一个数字也变化的问题
+      <!-- 问题示例: -->
+      <button v-on:click='count++'>{{count}}</button>
+      <button v-on:click='count++'>{{count}}</button>     <hr>
+      使用组件来做:写一个button组件
+      <my-button n=3></my-button>                         
+      <my-button n=7></my-button>
+
+    </div>
+
+      
+    
+</body>
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      xx:"hello world",
+      count:0,
+    },
+    methods: {
+      
+    },
+    computed: {},
+    components:{
+      'my-button':{
+        template:"<button v-on:click='addNum(n)'>{{count}}</button>",
+        data:function(){
+          return {
+            count:0
+          }
+        },
+        methods:{
+          addNum:function(n){
+            // console.log(this)  this是当前my-button这个组件
+            this.count += +n
+          }
+        },
+        props:['n']
+      },
+
+    }
+  });
+</script>
+
+</html>

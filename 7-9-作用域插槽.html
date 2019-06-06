@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <mycomponent>
+      <template  slot='xxx' slot-scope='temp'>
+        {{temp.text}}  <br>
+        {{temp.ss}}
+      </template>
+    </mycomponent>
+
+
+  </div>
+
+
+
+</body>
+<script>
+  Vue.component('mycomponent',{
+    template:`<div>
+                <slot text="我是子组件的数据" ss="asdfsadi"  name='xxx'></slot>
+              </div>`
+  })
+
+  var app = new Vue({
+    el: "#app",
+    data: {
+      xx: "hello world",
+    },
+    methods: {},
+    computed: {},
+    components: {
+
+    },
+  });
+</script>
+
+</html>

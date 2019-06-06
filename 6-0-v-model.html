@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+    .red{background-color: red;}
+    .blue{background-color:blue;}
+  </style>
+</head>
+
+<body>
+    <div id="app">
+
+
+      <ul>
+        <li v-for="(item,index) in arr">{{index}}---{{item}}</li>
+      </ul>
+
+      <div  v-bind:class='{"red":isActive,"blue":!isActive}' style='width:100px;height:100px;border:3px solid black'>这是div</div>
+      <button v-on:click='changeClass'>点击改变div背景颜色</button>
+      <hr><br>
+      <h3>v-model  在input和textarea的用法</h3>
+      xx 的内容是:{{xx}} <br>
+      <input type="text"  v-model='xx'>
+      <hr><br>
+      {{textAreaValue}} <br> 
+      <textarea name="" id="" cols="10" rows="2" v-model="textAreaValue">hello </textarea>
+      <hr><br>
+
+      <h3>v-model  在单选框的用法</h3>
+      <h3>单选框应用</h3>
+      A<input type="radio" name='radio' v-model="radioInput"  value='A'>    &nbsp;
+      B<input type="radio" name='radio' v-model="radioInput"  value='B'>    &nbsp;
+      C<input type="radio" name='radio' v-model="radioInput"  value='C'>    &nbsp;
+      D<input type="radio" name='radio' v-model="radioInput"  value='D'>    &nbsp;
+      你的选择:{{radioInput}} <br>
+
+
+
+      单个单选框  用v-bind : <input type="radio" v-bind:checked="oneRadio"><br>
+
+      <h4>单个单选框  用v-model 不生效</h4>
+      单个单选框  用v-model :  <input type="radio" v-model="oneRadio">
+                              <span style='font-size:10px;'>点击后app.oneRadio 变为null</span>
+                                      <hr><br>  
+
+
+
+
+
+
+      多个单选框: 选中的是  ----------- {{mutilRadio}}   <br>
+      孙悟空  <input type="radio" name="xx" value="孙悟空" v-model='mutilRadio'>   &nbsp;&nbsp;
+      猪八戒  <input type="radio" name="xx" value="猪八戒" v-model='mutilRadio'>   &nbsp;&nbsp;
+      沙和尚  <input type="radio" name="xx" value="沙和尚" v-model='mutilRadio'>   <hr><br>
+
+      单个复选框  用v-bind:  <input type="checkbox"  v-bind:checked='oneCheckBox'>  
+                            <span style='font-size:10px;'>点击后<em>不会</em>改变其对应的值</span> <br>
+      单个复选框  用v-model: <input type="checkbox"  v-model='oneCheckBox' >   
+                            <span style='font-size:10px;'>点击后<em>可以改变</em>其对应的值</span>  <br><br>
+
+      多个复选框  选中了:{{mutilCheckBox}}<br>
+      孙悟空  <input type="checkbox" value="孙悟空" v-model='mutilCheckBox'>   &nbsp;&nbsp;
+      猪八戒  <input type="checkbox" value="猪八戒" v-model='mutilCheckBox'>   &nbsp;&nbsp;
+      沙和尚  <input type="checkbox" value="沙和尚" v-model='mutilCheckBox'>   <hr><br>
+
+
+      单选的下拉框  选中了: {{selectValue}}               <br>
+      <select  v-model='selectValue'>
+        <option value="北京">北京</option>
+        <option value="上海">上海</option>
+        <option value="广州">广州</option>
+        <option value="深圳">深圳</option>
+      </select>                                          <br>
+
+      多选的下拉框  选中了: {{mutilSelectValue}}               <br>
+      <select  multiple v-model='mutilSelectValue'>
+        <option value="北京">北京</option>
+        <option value="上海">上海</option>
+        <option value="广州">广州</option>
+        <option value="深圳">深圳</option>
+      </select>                                          <br>
+      <hr>
+      
+      <h3>绑定值</h3>
+      单选按钮:                 <br>
+      <input type="radio"  v-model="picked" v-bind:value='valuexxx' > 1 {{picked}}----{{valuexxx}}          <br>
+
+      复选框:               <br>
+      <input type="checkbox" v-model='toggle' v-bind:trueValue="a"  v-bind:falseValue="b"> 2 {{toggle}} <br>
+
+      <input type="checkbox" v-model='m' > 3 {{m}} <br>
+
+      下拉框            <br>
+      <select v-model='xialakuang'>
+        <option value="北京1" v-bind:value="{name:'beijing',country:'China'}">北京</option>
+        <option value="上海2">上海</option>
+      </select>  <br>
+      选中了{{xialakuang.country}}----------typeof---{{typeof xialakuang}}  <br>
+        <hr>
+
+      <h3>修饰符</h3>
+      .lazy  失去焦点或者敲回车后再更新inputStr <br>
+      <input type="text" v-model='inputStr'>  {{inputStr}} <br>
+      <input type="text" v-model.lazy='lazyStr'> {{lazyStr}} <br>
+      .number 自动将输入值的类型转为数值类型 <br>
+      <input type="text" v-model.number="numberInput"> {{numberInput}}-----{{typeof numberInput}}  <br>
+      .trim  自动过滤首尾空格 <br>
+      <input type="text"  v-model.trim="trimInput">  trimInput.split('')为{{trimInput.split('')}}
+      
+
+
+
+    </div>
+
+      
+    
+</body>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      xx:"hello world",
+      textAreaValue:'zhangfei',
+      arr:['张三','李四','aaa','hello world'],
+      isActive:true,
+      oneRadio:true,
+      mutilRadio:'孙悟空',
+      oneCheckBox:false,
+      mutilCheckBox:[],
+      selectValue:[],
+      mutilSelectValue:[],
+
+      radioInput:'',
+
+      picked:false,
+      valuexxx:"xxx",
+
+      toggle:'',
+      a:'a',
+      b:'b',
+      m:false,
+
+      xialakuang:[],
+
+      inputStr:'hello ',
+      lazyStr:'world',
+
+      numberInput:"",
+      trimInput:"",
+
+    },
+    methods: {
+      changeClass:function(){
+        this.isActive=!this.isActive
+      }
+    },
+    computed: {
+
+    }
+  });
+</script>
+
+</html>

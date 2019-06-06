@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app" style='border:4px solid black;'>
+    <h4 style='text-align: center;'>这是父组件</h4>
+    <!-- {{xx}}  -->
+    传递一个固定信息:
+    <child-component  msg='父组件信息'>   </child-component>  <br>
+    传递一个动态信息:
+    <input type="text" v-model='yy' >{{yy}}
+    <child-component  v-bind:msg='yy'>   </child-component>  <br>
+
+    使用v-bind与不使用v-bind的区别:
+    <child-component  msg='[1,4,7]'>   </child-component> 
+    <child-component  v-bind:msg='[1,4,7]'>   </child-component>  <br>
+  </div>
+
+</body>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      xx: "hello world",
+      yy:'月亮很圆',
+    },
+    methods: {},
+    computed: {},
+    components: {
+      'child-component':{
+        props:['msg'],
+        template:"<div style='border:2px solid red; padding:10px;margin:10px 0'><em>这是子组件</em>,获取的父组件信息是:{{msg}}----msg.length={{msg.length}}-------typeof(msg)为 {{typeof msg}}</div>"
+      },
+
+    },
+  });
+</script>
+
+</html>

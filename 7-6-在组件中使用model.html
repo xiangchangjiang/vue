@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    余额还有:{{total}}
+    <childcomponent1 v-model='total'></childcomponent1>  <br>
+
+    ***************************************************************************
+    <br>
+    <textarea name="" id="" cols="75" rows="3">
+      <input type="text" v-model='xx'> 相当于
+      <input type="text" v-bind:value='xx' v-on:input='xx=$event.target.value'>
+    </textarea>  <br>
+
+    <input type="text" v-model='xx'>
+     {{xx}}    <br>  
+    <input type="text" v-bind:value='xx' v-on:input='xx=$event.target.value'> <br>
+    ***************************************************************************
+  </div>
+    
+</body>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      xx: "hello world",
+      total:3000,
+    },
+    methods: {
+      // fatherchange:function(num){
+      //   this.total+= num
+      // }
+    },
+    computed: {},
+    components: {
+      'childcomponent1':{
+        data:function(){
+          return {
+            cnum:3000,
+          }
+        },
+        methods:{
+          fatheraddnum:function(){
+            this.cnum+=100
+            this.$emit('input',this.cnum)
+          },
+        },
+        template:`
+        <div>
+          <button v-on:click='fatheraddnum'>点击增加</button>
+        </div>`
+      },
+    },
+  });
+</script>
+
+</html>

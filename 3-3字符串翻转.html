@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+    <div id="app"> 
+      使用计算属性翻转字符串<br>
+      {{cReverseStr}} <br>
+
+      使用方法翻转字符串<br>
+      <button @click='mReverseStr'>点击翻转</button>{{str2}}
+    </div>  
+</body>
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      str1:"hello world",
+      str2:"abcdefghi"
+    },
+    methods: {
+      mReverseStr:function(){
+        this.str2=this.str2.split('').reverse().join('') 
+      }
+    },
+    computed: {
+      cReverseStr:function fun(){
+        return this.str1.split('').reverse().join('')
+      }
+    }
+  });
+</script>
+
+</html>

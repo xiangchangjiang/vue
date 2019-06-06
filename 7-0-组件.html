@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组件的使用方法</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+  <h4>谈谈你对组件的理解</h4>
+  <p>组件 (Component) 是 Vue.js 最强大的功能之一。组件可以扩展 HTML 元素，封装可重用的代码。在较高层面上，组件是自定义元素，Vue.js 的编译器为它添加特殊功能。在有些情况下，组件也可以表现为用 is 特性进行了扩展的原生 HTML 元素。所有的 Vue 组件同时也都是 Vue 的实例，所以可接受相同的选项对象 (除了一些根级特有的选项) 并提供相同的生命周期钩子。</p>
+
+    <div id="app" style="border: 2px solid greenyellow">
+      {{xx}} 
+      <table>
+        <tbody is='my-component'></tbody>
+      </table>
+      
+      <my-component>  </my-component>
+      <xx-x> </xx-x>
+    </div>
+
+    <br>
+
+    <div id="bpp" style="border: 2px solid rgb(54, 77, 19)">
+      {{xx}} 
+
+      <bpp-component></bpp-component>
+      <my-component></my-component>
+    </div>
+      
+    
+</body>
+<script>
+  // 组件注册
+  Vue.component('my-component',{
+    template:'<div > 我是一个组件 </div>'
+  })
+
+  new Vue({
+    el: "#app",
+    data: {
+      xx:"hello world"
+    },
+    components:{
+      'app-component':{
+        template:'<div> 我是局部组件,只能在app中用 </div>'
+      },
+      'xx-x':{
+        template:'<div> 我是第二个局部组件,只能在app中用 </div>'
+      }
+    },
+    methods: {},
+    computed: {
+
+    }
+  });
+  new Vue({
+    el: "#bpp",
+    data: {
+      xx:"hello world"
+    },
+    components:{
+      'bpp-component':{
+        template:'<div> 我是局部组件,只能在bpp中用 </div>'
+      }
+    },
+    methods: {},
+    computed: {
+
+    }
+  });
+</script>
+
+</html>

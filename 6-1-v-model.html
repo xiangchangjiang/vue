@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>v-model</title>
+</head>
+
+<body>
+  <div id='app'>
+
+    <input type="text" v-model="textInput" > {{textInput}}  <br> <hr>
+
+    <h3>单选框</h3>
+    A<input type="radio" name='radio' v-model="radioInput"  value='A'>    &nbsp;
+    B<input type="radio" name='radio' v-model="radioInput"  value='B'>    &nbsp;
+    C<input type="radio" name='radio' v-model="radioInput"  value='C'>    &nbsp;
+    D<input type="radio" name='radio' v-model="radioInput"  value='D'>    &nbsp;
+    你的选择:{{radioInput}} <br><hr>
+
+    <h3>复选框</h3>
+    孙悟空<input type="checkbox" v-model="checkboxInput" value='孙悟空'>    &nbsp;
+    猪八戒<input type="checkbox" v-model="checkboxInput" value='猪八戒'>    &nbsp;
+    沙和尚<input type="checkbox" v-model="checkboxInput" value='沙和尚'>    <br>
+    选中了{{checkboxInput}}
+
+
+    
+  </div>
+</body>
+<script>
+  var app = new Vue({
+    el:'#app',
+    data: {
+      textInput: 'hello',
+      radioInput:'',
+      a:'xxx',
+      checkboxInput:[],
+      
+    }
+  })
+</script>
+</html>

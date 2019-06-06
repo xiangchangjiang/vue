@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app"  style='border:4px solid black;'>
+    <h3 style='text-align: center;'>这是父组件</h3>
+
+    <h4>练习一:通过在input 中输入数据 动态改变div的宽度</h4>
+    <input type="text" v-model='width'>  {{width}}  <br>
+    <div v-bind:style='style'>这是div</div>
+
+    <br>
+    <h4>练习二:通过给父组件中input中输入数据 动态改变 父组件中的 子组件实例div 的宽度</h4>
+    <input type="text" v-model='controlChildWidth'>{{controlChildWidth}}
+    <child-component v-bind:childwidth='controlChildWidth'></child-component>
+  </div>
+
+</body>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      width:100,
+      controlChildWidth:400,
+    },
+    methods: {},
+    computed: {
+      style:function(){
+        return{
+          width:this.width+'px',
+          background:'red',
+        }
+      }
+    },
+    components: {
+      'child-component':{
+        props:['childwidth'],
+
+        computed:{
+          divStyle:function(){
+            return{
+              width:this.childwidth+'px',
+              border:'2px solid greenyellow',
+              }
+          }
+        },
+
+        template:"<div v-bind:style='divStyle'> 这是子组件{{divStyle}} ---- {{childwidth}} </div>",
+      },
+    },
+  });
+</script>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+    <div id="app">
+      {{xx}} 
+      <div  v-bind:style="{color:a,fontSize:b+'px'}">v-bind绑定内联样式对象写法</div>
+      <hr>
+      <br>
+      <div  v-bind:style='[styleA,styleB]'>v-bind绑定内联样式数组写法</div>      
+
+
+    </div>
+
+      
+    
+</body>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      xx:"hello world",
+      a:'red',
+      b:30,
+      styleA:{
+        color:"pink",       //"pink;"这样写不行
+        border:"3px solid red"
+      },
+      styleB:{
+        backgroundColor:"greenyellow",
+        fontSize:"40px"
+      }
+    },
+    methods: {},
+    computed: {
+
+    }
+  });
+</script>
+
+</html>

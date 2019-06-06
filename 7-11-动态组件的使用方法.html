@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <component :is="thisview"></component>
+    <button v-on:click="handle('A')">11</button>
+    <button v-on:click="handle('B')">22</button>
+    <button v-on:click="handle('C')">33</button>
+    <button v-on:click="handle('D')">44</button>
+  </div>
+
+
+
+</body>
+<script>
+  Vue.component('comA',{
+    template:'<div>组件一</div>'
+  })
+  Vue.component('comB',{
+    template:'<div>组件二</div>'
+  })
+  Vue.component('comC',{
+    template:'<div>组件三</div>'
+  })
+  Vue.component('comD',{
+    template:'<div>组件四</div>'
+  })
+  
+
+  var app = new Vue({
+    el: "#app",
+    data: {
+      xx: "hello world",
+      thisview:'comB'
+
+    },
+    methods: {
+      handle:function(tag){
+        this.thisview='com'+tag
+      }
+    },
+    computed: {},
+    components: {
+
+    },
+  });
+</script>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    {{xx}}
+
+    <acomponent ref='a'></acomponent>
+    <bcomponent ref='b'></bcomponent>
+    <ccomponent ref='c'></ccomponent>---------{{msg}} <br>
+    <button v-on:click='getchildmsg'>这是app的按钮,点击获取子组件的内容</button>----{{datafromchild}}
+
+  </div>
+
+
+
+</body>
+<script>
+  Vue.component('acomponent',{
+    template:"<div><button v-on:click='sendmessage'>这是a组件</button></div>",
+    data:function(){
+      return {
+        msg:'这是a组件中的信息',
+
+      }
+    },
+    methods:{
+      sendmessage:function(){
+        this.$root.bus.$emit('eventB',this.msg)
+      }
+    }
+  })
+  
+  Vue.component('bcomponent',{
+    template:"<div>这是b组件</div>",
+    data:function(){
+      return{
+        msg:'这是b组件中的信息',
+      }
+    },
+    created:function(){
+      this.$root.bus.$on('eventB',function(value){
+        console.log(value)
+      })
+    },
+  })
+
+  Vue.component('ccomponent',{
+    template:"<button v-on:click='changeappmsg'>这是c组件,点击修改根组件APP的msg</button>",
+    data:function(){
+      return{
+        msg:'这是c组件中的信息',
+      }
+    },
+    methods:{
+      changeappmsg:function(){
+        this.$parent.msg='已经修改'
+      }
+    }
+  })
+
+  var app = new Vue({
+    el: "#app",
+    data: {
+      xx: "hello world",
+      msg:'尚未修改',
+      bus:new Vue(),
+      datafromchild:'点啊'
+    },
+    methods: {
+      getchildmsg:function(){
+        this.datafromchild = this.$refs.b.msg
+        alert(this.$refs.a.msg)
+        alert(this.$refs.b.msg)
+        alert(this.$refs.c.msg)
+      }
+    },
+    computed: {},
+    components: {
+
+    },
+  });
+</script>
+
+</html>
