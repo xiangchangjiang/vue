@@ -14,7 +14,7 @@
 
 <body>
   <p>需求:根据传递的数字决定内容显示的标签</p> 
-  <p>用slot插槽</p>  
+  <p>用render函数</p>  
 
   <div id="app">
     <child v-bind:a='num'>
@@ -23,25 +23,13 @@
 
   </div>
 
-  <template id='hdom'>
-    <div>
-    <h1 v-if='a===1'>
-      <slot></slot>
-    </h1>
-    <h2 v-if='a===2'>
-      <slot></slot>
-    </h2>
-    <h3 v-if='a===3'>
-      <slot></slot>
-    </h3>  
-    </div>
-  </template>
-
 </body>
 <script>
   Vue.component('child',{
-    template:'#hdom',
-    props:['a']
+    props:['a'],
+    render:function(createElement){
+      return createElement('h'+this.a,this.$slots.default)
+    }
   })
 
 
@@ -49,7 +37,7 @@
     el: "#app",
     data: {
       xx: "hello world",
-      num:1,
+      num:2,
     },
     methods: {},
     computed: {},
