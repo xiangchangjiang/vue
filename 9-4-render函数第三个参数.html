@@ -13,22 +13,23 @@
 </head>
 
 <body>
-  <p>需求:根据传递的数字决定内容显示的标签</p> 
-  <p>用render函数</p>  
-
   <div id="app">
-    <child v-bind:a='num'>
-      看看文字是几级标题
-    </child>
-
+    {{xx}}
+    <child1></child1>
+    <child2></child2>
+    <child3></child3>
   </div>
+
+
 
 </body>
 <script>
-  Vue.component('child',{
-    props:['a'],
-    render:function(k){
-      return k('h'+this.a,this.$slots.default)
+  Vue.component('child1',{
+    render:function(createElemnet){
+      return createElemnet('div',[
+        createElemnet('h1','这是h1标题'),
+        createElemnet('h4','这是h4标题')
+      ])
     }
   })
 
@@ -37,7 +38,6 @@
     el: "#app",
     data: {
       xx: "hello world",
-      num:1,
     },
     methods: {},
     computed: {},

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    {{xx}}
+    <child1></child1>
+    <child2></child2>
+    <child3></child3>
+  </div>
+
+
+
+</body>
+<script>
+  Vue.component('child1',{
+    render:function(createElemnet){
+      return createElemnet('div')
+    }
+  })
+  Vue.component('child2',{
+    render:function(createElemnet){
+      return createElemnet({
+        template:'<div>这是一个对象</div>'
+      })
+    }
+  })
+  Vue.component('child3',{
+    render:function(createElemnet){
+      var domFun=function(){
+        return {
+          template:'<div>这是一个函数</div>'
+        }
+      }
+      return createElemnet(domFun())
+    }
+  })
+
+  var app = new Vue({
+    el: "#app",
+    data: {
+      xx: "hello world",
+    },
+    methods: {},
+    computed: {},
+    components: {
+
+    },
+  });
+</script>
+
+</html>
