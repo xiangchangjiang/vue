@@ -14,18 +14,27 @@
 
 <body>
   <p>需求:根据传递的数字决定内容显示的标签</p> 
-  <p>用v-if实现</p>  
+  <p>用slot插槽</p>  
 
   <div id="app">
-    <child v-bind:a='num'></child>
+    <child v-bind:a='num'>
+      看看文字是几级标题
+    </child>
 
   </div>
 
   <template id='hdom'>
     <div>
-    <h1 v-if='a===1'>以h1标签显示</h1>
-    <h2 v-if='a===2'>以h2标签显示</h2>
-    <h3 v-if='a===3'>以h3标签显示</h3></div>
+    <h1 v-if='a===1'>
+      <slot></slot>
+    </h1>
+    <h2 v-if='a===2'>
+      <slot></slot>
+    </h2>
+    <h3 v-if='a===3'>
+      <slot></slot>
+    </h3>  
+    </div>
   </template>
 
 </body>
@@ -40,7 +49,7 @@
     el: "#app",
     data: {
       xx: "hello world",
-      num:2,
+      num:1,
     },
     methods: {},
     computed: {},
