@@ -13,21 +13,34 @@
 </head>
 
 <body>
+  <p>需求:根据传递的数字决定内容显示的标签</p> 
+  <p>用v-if实现</p>  
+
   <div id="app">
-    {{xx}}
-
-
+    <child v-bind:a='num'></child>
 
   </div>
 
-
+  <template id='hdom'>
+    <div>
+    <h1 v-if='a===1'>以h1标签显示</h1>
+    <h2 v-if='a===2'>以h2标签显示</h2>
+    <h3 v-if='a===3'>以h3标签显示</h3></div>
+  </template>
 
 </body>
 <script>
+  Vue.component('child',{
+    template:'#hdom',
+    props:['a']
+  })
+
+
   var app = new Vue({
     el: "#app",
     data: {
       xx: "hello world",
+      num:2,
     },
     methods: {},
     computed: {},
