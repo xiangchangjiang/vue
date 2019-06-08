@@ -9,13 +9,15 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
   <style>
+
   </style>
 </head>
 
 <body>
   <div id="app">
-    {{xx}}
-    <child1></child1>
+    {{xx}}            <br>
+    <!-- <child1 v-bind:childxx='xx' v-on:input='showname'> </child1> -->
+    <child1 v-bind:childxx='xx' v-model='xx'> </child1>
 
   </div>
 
@@ -23,14 +25,24 @@
 
 </body>
 <script>
-  //第三个参数的类型只能是两种String  或  Array 
-
   Vue.component('child1',{
+    props:['childxx'],
     render:function(createElemnet){
-      return createElemnet('div',[
-        createElemnet('h1','这是h1标题'),
-        createElemnet('h4','这是h4标题')
-      ])
+      var self=this
+      return createElemnet('input',{
+        domProps:{
+          value:self.childxx
+        },
+        on:{
+          input:function(event){
+            console.log(this,11111)
+            console.log(self,222222)
+            self.$emit('input',event.target.value)
+          }
+        }
+      })
+     
+
     }
   })
 
@@ -40,10 +52,13 @@
     data: {
       xx: "hello world",
     },
-    methods: {},
+    methods: {
+      // showname:function(value){
+      //   this.xx=value
+      // }
+    },
     computed: {},
     components: {
-
     },
   });
 </script>

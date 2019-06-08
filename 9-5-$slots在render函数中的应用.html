@@ -15,7 +15,14 @@
 <body>
   <div id="app">
     {{xx}}
-    <child1></child1>
+    <child1>
+      <!-- 要求:将下边的内容按照标题  正文  结尾的顺序呈现在网页上 -->
+      <p >这是一段话,这是一段话</p>
+      <p >这是第二段话</p>
+      <h4 slot='footer'>这是文章最后一部分</h4>
+      <h2 slot='header'>这是标题</h2>
+
+    </child1>
 
   </div>
 
@@ -23,13 +30,17 @@
 
 </body>
 <script>
-  //第三个参数的类型只能是两种String  或  Array 
-
   Vue.component('child1',{
     render:function(createElemnet){
+      var header=this.$slots.header//header 类型为Array
+      console.log(header,000)
+      console.log(typeof header,11111)
+      var main=this.$slots.default
+      var footer=this.$slots.footer
       return createElemnet('div',[
-        createElemnet('h1','这是h1标题'),
-        createElemnet('h4','这是h4标题')
+        createElemnet('header',header),
+        createElemnet('main',main),
+        createElemnet('footer',footer)
       ])
     }
   })

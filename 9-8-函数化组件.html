@@ -15,7 +15,8 @@
 <body>
   <div id="app">
     {{xx}}
-    <child1></child1>
+
+    <child1 v-bind:value='xx'></child1>
 
   </div>
 
@@ -23,15 +24,21 @@
 
 </body>
 <script>
-  //第三个参数的类型只能是两种String  或  Array 
-
   Vue.component('child1',{
-    render:function(createElemnet){
-      return createElemnet('div',[
-        createElemnet('h1','这是h1标题'),
-        createElemnet('h4','这是h4标题')
-      ])
-    }
+    functional : true,
+    render:function(createElement,context){
+      return createElement('button',{
+        on:{
+          click:function(){
+            console.log(context)
+            console.log(context.parent)
+            console.log(context.parent.xx)
+            console.log(context.props.value)
+          }
+        }
+      },'点我')
+    },
+    props:['value']
   })
 
 
